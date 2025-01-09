@@ -24,15 +24,13 @@ const Menu = () => {
       <Cover img={menuImg} title={"Our Menu"}></Cover>
       <SectionTitle subHeading={"Don't Miss"} heading={"Today's Offer"}></SectionTitle>
 
-      <MenuCategory items={dessert} title={"Dessert"} coverImage={dessertImg}></MenuCategory>
+      <MenuCategory items={dessert} title={"dessert"} coverImage={dessertImg}></MenuCategory>
 
-      <MenuCategory items={pizza} title={"Pizza"} coverImage={pizzaImg}></MenuCategory>
+      <MenuCategory items={pizza} title={"pizza"} coverImage={pizzaImg}></MenuCategory>
 
-      <MenuCategory items={soup} title={"Soup"} coverImage={soupImg}></MenuCategory>
+      <MenuCategory items={soup} title={"soup"} coverImage={soupImg}></MenuCategory>
 
-      <MenuCategory items={salad} title={"Salad"} coverImage={saladImg}></MenuCategory>
-
-      <MenuCategory items={offered} title={"Offered"} coverImage={menuImg}></MenuCategory>
+      <MenuCategory items={salad} title={"salad"} coverImage={saladImg}></MenuCategory>
     </div>
   );
 };
