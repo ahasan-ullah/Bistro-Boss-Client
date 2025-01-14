@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { authContext } from "../../Providers/AuthProvider";
+import { authContext } from "../../providers/AuthProvider";
 
 const Navbar = () => {
-  const { user,logout } = useContext(authContext);
-  const handleLogout=()=>{
+  const { user, logout } = useContext(authContext);
+  const handleLogout = () => {
     logout()
-    .then(()=>{})
-    .catch(err=>console.log(err));
-  }
+      .then(() => {})
+      .catch((err) => console.log(err));
+  };
   const navOptions = (
     <>
       <li>
@@ -23,7 +23,9 @@ const Navbar = () => {
 
       {user ? (
         <>
-          <button onClick={handleLogout} className="btn btn-ghost">Button</button>
+          <li>
+            <button onClick={handleLogout}>Logout</button>
+          </li>
         </>
       ) : (
         <>
