@@ -11,12 +11,11 @@ import Swal from "sweetalert2";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
-  const { signIn } = useContext(AuthContext);
+  const { login } = useContext(authContext);
   const navigate = useNavigate();
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/";
-  console.log("state in the location login page", location.state);
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -28,7 +27,7 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
-    signIn(email, password).then((result) => {
+    login(email, password).then((result) => {
       const user = result.user;
       console.log(user);
       Swal.fire({
