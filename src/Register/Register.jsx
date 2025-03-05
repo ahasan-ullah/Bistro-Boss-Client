@@ -21,7 +21,6 @@ const Register = () => {
       const loggedUser = result.user;
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
-          console.log("user profile info updated");
           reset();
           Swal.fire({
             position: "top-end",
