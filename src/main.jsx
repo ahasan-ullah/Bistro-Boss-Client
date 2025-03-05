@@ -4,7 +4,7 @@ import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import router from "./routes/Routes";
 import { HelmetProvider } from "react-helmet-async";
-import AuthProvider from "./Providers/AuthProvider";
+import AuthProvider from "./providers/AuthProvider";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
