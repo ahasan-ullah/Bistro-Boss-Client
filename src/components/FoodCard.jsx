@@ -3,9 +3,10 @@ import { authContext } from "../providers/AuthProvider";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const FoodCard = ({item}) => {
-  const {name,image,price,recipe}=item;
+  const {name,image,price,recipe,_id}=item;
   const {user}=useAuth();
   const navigate=useNavigate();
   const location=useLocation();
@@ -14,7 +15,23 @@ const FoodCard = ({item}) => {
       console.log(food,user.email);
       const cartItem={
         menuId: _id,
+        email: user.email,
+        name,
+        image,
+        price
       }
+      axios.post('http://localhost:5000/cart',cartItem)
+      .then(res=>{
+        if(res.data.insertedId){
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Product added to cart",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      });
     }
     else{
       Swal.fire({
@@ -31,7 +48,6 @@ const FoodCard = ({item}) => {
         }
       });
     }
-    
   }
   return (
     <div className="card w-96 bg-base-100 shadow-xl">
