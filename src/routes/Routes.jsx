@@ -7,37 +7,53 @@ import Login from "../pages/Login/Login";
 import Register from "../Register/Register";
 import PrivateRoute from "./PrivateRoute";
 import Secret from "../Secret/Secret";
+import Dashboard from "../layout/Dashboard";
+import Cart from "../pages/Dashboard/Cart/Cart";
 
-const router=createBrowserRouter([
+const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <Main></Main>,
     children: [
       {
-        path: '/',
-        element: <Home></Home>
+        path: "/",
+        element: <Home></Home>,
       },
       {
-        path: 'menu',
-        element: <Menu></Menu>
+        path: "menu",
+        element: <Menu></Menu>,
       },
       {
-        path: 'order/:category',
-        element: <Order></Order>
+        path: "order/:category",
+        element: <Order></Order>,
       },
       {
-        path: 'login',
-        element: <Login></Login>
+        path: "login",
+        element: <Login></Login>,
       },
       {
-        path: 'signup',
-        element: <Register></Register>
+        path: "signup",
+        element: <Register></Register>,
       },
       {
-        path: 'secret',
-        element: <PrivateRoute><Secret></Secret></PrivateRoute>
-      }
-    ]
-  }
-])
+        path: "secret",
+        element: (
+          <PrivateRoute>
+            <Secret></Secret>
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: "cart",
+        element: <Cart></Cart>
+      },
+    ],
+  },
+]);
 export default router;
