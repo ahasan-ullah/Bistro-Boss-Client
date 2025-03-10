@@ -118,7 +118,7 @@ const Login = () => {
                 />
               </div>
             </form>
-            
+            <SocialLogin></SocialLogin>
             <p className="px-8 my-4">
               <small>
                 New Here? <Link to="/signup">Create an account</Link>{" "}
