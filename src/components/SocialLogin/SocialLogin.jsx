@@ -1,7 +1,16 @@
+import useAuth from "../../hooks/useAuth";
+import { authContext } from "../../providers/AuthProvider";
+
 const SocialLogin = () => {
+  const {googleLogin}=useAuth();
+  const handleGoogleLogIn=()=>{
+    googleLogin().then(result=>{
+      console.log(result.user);
+    })
+  }
   return (
     <div className="px-8">
-      <button className="btn bg-white text-black border-[#e5e5e5] w-full">
+      <button onClick={handleGoogleLogIn} className="btn bg-white text-black border-[#e5e5e5] w-full">
         <svg
           aria-label="Google logo"
           width="16"
