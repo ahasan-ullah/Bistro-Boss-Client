@@ -1,16 +1,36 @@
+import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
-import { authContext } from "../../providers/AuthProvider";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { useNavigate } from "react-router-dom";
 
 const SocialLogin = () => {
-  const {googleLogin}=useAuth();
-  const handleGoogleLogIn=()=>{
-    googleLogin().then(result=>{
-      console.log(result.user);
-    })
-  }
+  const { googleLogin } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
+  const handleGoogleLogIn = () => {
+    googleLogin().then((result) => {
+      const userInfo = {
+        email: result.user?.email,
+        name: result.user?.displayName,
+      };
+      axiosPublic.post("/users", userInfo).then((res) => {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "User created successfully.",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/");
+      });
+    });
+  };
   return (
     <div className="px-8">
-      <button onClick={handleGoogleLogIn} className="btn bg-white text-black border-[#e5e5e5] w-full">
+      <button
+        onClick={handleGoogleLogIn}
+        className="btn bg-white text-black border-[#e5e5e5] w-full"
+      >
         <svg
           aria-label="Google logo"
           width="16"
