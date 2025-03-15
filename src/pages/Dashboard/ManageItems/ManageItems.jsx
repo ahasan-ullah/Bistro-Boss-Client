@@ -9,14 +9,12 @@ const ManageItems = () => {
         heading={"Manage all items"}
         subHeading={"Hurry Up"}
       ></SectionTitle>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto w-full">
         <table className="table">
           {/* head */}
           <thead>
             <tr>
-              <th>
-                #
-              </th>
+              <th>#</th>
               <th>Image</th>
               <th>Item Name</th>
               <th>Price</th>
@@ -26,30 +24,31 @@ const ManageItems = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            <tr>
-              <th>
-              </th>
-              <td>
-                <div className="flex items-center gap-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle h-12 w-12">
-                      <img
-                        src="https://img.daisyui.com/images/profile/demo/2@94.webp"
-                        alt="Avatar Tailwind CSS Component"
-                      />
+            {menu.map((item,index) => (
+              <tr key={item._id}>
+                <th>{index+1}</th>
+                <td>
+                  <div className="flex items-center gap-3">
+                    <div className="avatar">
+                      <div className="mask mask-squircle h-12 w-12">
+                        <img
+                          src={item.image}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-              </td>
-              <td>
-                
-              </td>
-              <td>Purple</td>
-              <td>
-                <button className="btn btn-ghost btn-xs">details</button>
-              </td>
-            </tr>
-            </tbody>
+                </td>
+                <td>{item.name}</td>
+                <td>${item.price}</td>
+                <td>
+                  <button className="btn-md bg-orange-500 text-white text-lg rounded-md">Update</button>
+                </td>
+                <td>
+                  <button className="btn-md rounded-md bg-orange-500 text-white text-lg">Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </div>
