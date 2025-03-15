@@ -10,7 +10,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const AddItems = () => {
   const axiosPublic=useAxiosPublic();
   const axiosSecure=useAxiosSecure();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit,reset } = useForm();
   const onSubmit = async(data) => {
     const imageFile={image: data.image[0]};
     const res=await axiosPublic.post(image_hosting_api,imageFile,{
