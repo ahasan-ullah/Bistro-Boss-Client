@@ -1,8 +1,15 @@
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import SectionTitle from "../../../components/SectionTitle";
 import useMenu from "../../../hooks/useMenu";
 
 const ManageItems = () => {
   const [menu] = useMenu();
+  const handleDeleteItem=(item)=>{
+
+  }
+  const handleUpdateItem=(item)=>{
+    
+  }
   return (
     <div>
       <SectionTitle
@@ -24,16 +31,14 @@ const ManageItems = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {menu.map((item,index) => (
+            {menu.map((item, index) => (
               <tr key={item._id}>
-                <th>{index+1}</th>
+                <th>{index + 1}</th>
                 <td>
                   <div className="flex items-center gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12">
-                        <img
-                          src={item.image}
-                        />
+                        <img src={item.image} />
                       </div>
                     </div>
                   </div>
@@ -41,10 +46,14 @@ const ManageItems = () => {
                 <td>{item.name}</td>
                 <td>${item.price}</td>
                 <td>
-                  <button className="btn-md bg-orange-500 text-white text-lg rounded-md">Update</button>
+                  <button onClick={handleUpdateItem(item)} className="btn btn-ghost btn-lg">
+                    <FaEdit className="text-red-600"></FaEdit>
+                  </button>
                 </td>
                 <td>
-                  <button className="btn-md rounded-md bg-orange-500 text-white text-lg">Delete</button>
+                  <button onClick={handleDeleteItem(item)} className="btn btn-ghost btn-lg">
+                    <FaTrashAlt className="text-red-600"></FaTrashAlt>
+                  </button>
                 </td>
               </tr>
             ))}
