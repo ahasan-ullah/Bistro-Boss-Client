@@ -1,11 +1,36 @@
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import SectionTitle from "../../../components/SectionTitle";
 import useMenu from "../../../hooks/useMenu";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ManageItems = () => {
   const [menu] = useMenu();
+  const axiosSecure=useAxiosSecure();
   const handleDeleteItem=(item)=>{
-
+    Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            axiosSecure.delete(`/menu/${item._id}`)
+            .then(res=>{
+              if(res.data.deletedCount>0){
+                Swal.fire({
+                  title: "Deleted!",
+                  text: "Your file has been deleted.",
+                  icon: "success"
+                });
+                refetch();
+              }
+            });
+          }
+        });
   }
   const handleUpdateItem=(item)=>{
     
@@ -46,12 +71,12 @@ const ManageItems = () => {
                 <td>{item.name}</td>
                 <td>${item.price}</td>
                 <td>
-                  <button onClick={handleUpdateItem(item)} className="btn btn-ghost btn-lg">
+                  <button onClick={()=>handleUpdateItem(item)} className="btn btn-ghost btn-lg">
                     <FaEdit className="text-red-600"></FaEdit>
                   </button>
                 </td>
                 <td>
-                  <button onClick={handleDeleteItem(item)} className="btn btn-ghost btn-lg">
+                  <button onClick={()=>handleDeleteItem(item)} className="btn btn-ghost btn-lg">
                     <FaTrashAlt className="text-red-600"></FaTrashAlt>
                   </button>
                 </td>
