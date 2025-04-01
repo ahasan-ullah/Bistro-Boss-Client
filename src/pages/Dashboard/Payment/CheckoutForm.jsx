@@ -8,6 +8,7 @@ const CheckoutForm = () => {
   const {user}=useAuth();
   const stripe=useStripe();
   const elements=useElements();
+  const [transactionId,setTransactionId]=useState('');
   const [error,setError]=useState('');
   const [clientSecret,setClientSecret]=useState('');
   const axiosSecure=useAxiosSecure();
@@ -60,7 +61,9 @@ const CheckoutForm = () => {
       console.log('confirm error')
     }
     else{
-      console.log(paymentIntent)
+      if(paymentIntent.status==='succeeded'){
+        setTransactionId(paymentIntent.id);
+      }
     }
   }
   return (
@@ -85,6 +88,9 @@ const CheckoutForm = () => {
         Pay
       </button>
       <p className="text-red-600">{error}</p>
+      {
+        transactionId && <p className="text-green-600">Your Transaction id : {transactionId}</p>
+      }
     </form>
   );
 };
