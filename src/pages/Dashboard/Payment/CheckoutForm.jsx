@@ -64,6 +64,17 @@ const CheckoutForm = () => {
       if(paymentIntent.status==='succeeded'){
         setTransactionId(paymentIntent.id);
       }
+      const payment={
+        email: user.email,
+        price: totalPrice,
+        transactionId: paymentIntent.id,
+        date: new Date(),
+        cartId: cart.map(item=>item._id),
+        menuId: cart.map(item=>item.menuId),
+        status: 'pending'
+      }
+      const res=await axiosSecure.post('/payments',payment);
+      console.log(res);
     }
   }
   return (
